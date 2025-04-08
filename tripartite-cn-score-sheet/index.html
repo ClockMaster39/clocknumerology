@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seven Boxes</title>
+    <style>
+        body {
+            margin: 8px;
+            padding: 0;
+            overflow-x: hidden;
+			background-color: #c0c0c0;
+        }
+
+        h1 {
+            margin: 0;
+            padding-left: 8px;
+			padding-top: 8px;
+        }  
+		
+		.left-header {
+			text-shadow: 
+				-1px -1px 0 black,
+				1px -1px 0 black,
+				-1px 1px 0 black,
+				1px 1px 0 black; 
+		}
+		
+		img {
+			width: 19%;
+			height: auto; 
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			left: 77%; 
+			bottom: 53%;
+		}
+		
+		h3 {
+			margin-left: 30px;
+		} 
+		
+		div#future-score {
+			font-size: 1.4em;
+			width: 33%;
+			text-align: justify;
+			padding: 3px;
+		}
+		
+        .container {
+            gap: 5px;
+            flex-wrap: wrap;
+			margin-bottom: 5px;
+            position: relative;
+            top: 5%;
+            display: flex;
+            flex-direction: column; /* This arranges the label and boxes vertically */
+            align-items: center;
+        }
+
+        .box, .box-point, .box-no-score {
+            width: 35.4%;
+            height: 13.7%;
+            background-color: azure;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: flex-start;
+			flex-direction: column;
+            font-size: 1em;
+            max-width: 100%; 
+			box-sizing: border-box;
+        }
+
+        .box-point {
+            background-color: palegreen;
+        }  
+		
+		.box-no-score {
+			background-color: lightcoral;
+		}
+		
+		p {
+			margin: 5px; 
+			align-items: center;
+		} 
+
+        /* Flexbox container for the labels */
+        .labels-container {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        /* Flex settings for each label div */
+        .label-box {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px;
+            background-color: lightblue;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        #total-box {
+            position: relative;
+            left: 45.9%; 
+			max-width: 22%;
+			font-size: 2em;
+			background-color: cornsilk;
+			border: 4px solid black; 
+			border-radius: 0.6em;
+			margin-bottom: 60px;
+        }
+
+        /* Container label styling */
+        .container h4 {
+            margin: 7px;
+            padding: 10px;
+            font-size: 1.8em;
+            background-color: #98ab98;
+            text-align: center;
+            width: 98%;
+			color: cornsilk;
+        } 
+		
+		
+		.graph {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border: 2px solid black;
+			border-radius: 1.2em; 
+			background-color: cornsilk;
+			padding-top: 6px;  
+			margin-top: 30px; 
+			margin-bottom: 30px;
+			width: 90%;
+			max-width: 1200px;
+			position: relative; 
+			left: 10%;
+		}
+
+.score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  background-color: #ffffff;
+  border: 2px solid #333;
+  border-radius: 5px;
+  width: 200px;
+  text-align: center;
+}
+
+/* Score Box Hover Effects */
+.score-box {
+  background-color: #f0f0f0;
+}
+
+/* Score Name Styling */
+.score-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+}
+
+/* Points Styling */
+.score-points {
+  font-size: 1em;
+  color: black;
+} 
+
+/* Styling for each score box with different colors */
+.basic-win {
+  background-color: #e0e0e0;
+}
+
+.bronze-win {
+  background-color: #cd7f32;
+}
+
+.silver-win {
+  background-color: #c0c0c0;
+}
+
+.gold-win {
+  background-color: #ffd700;
+}
+
+
+.platinum-win {
+	background: linear-gradient(to right, #B0B0B0, #A9A9A9, #D3D3D3, #C0C0C0, #E5E5E5);
+	color: black;
+	text-shadow: 
+			-1px -1px 0 white,
+			1px -1px 0 white,
+			-1px 1px 0 white,
+			1px 1px 0 white;
+}
+
+.near-perfect-win {
+  background: linear-gradient(to right, #2E8B57, #66CDAA, #3CB371, #228B22, #32CD32);
+  color: black;
+  text-shadow: 
+			-1px -1px 0 white,
+			1px -1px 0 white,
+			-1px 1px 0 white,
+			1px 1px 0 white;
+}
+
+.perfect-win {
+  background: linear-gradient(to right, #FF0000, #FF7F00, #FFFF00, #008000, #0000FF, #4B0082, #8A2BE2);
+  color: black; 
+  text-shadow: 
+			-1px -1px 0 white,
+			1px -1px 0 white,
+			-1px 1px 0 white,
+			1px 1px 0 white; 
+			
+} 
+
+#check-mark {
+	font-size: 2em;
+} 
+
+#rules-text {
+	font-size: 1.6em;
+	text-align: justify;
+	padding: 20px;
+}
+
+a {
+	text-decoration: none;
+	position: relative;
+	left: 44%;
+	font-size: 1.3em;
+	padding: 25px;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+    <h1><span class="left-header" style="padding-left: 6.9em; background-color: #e839d2; color: #caf85e">Cipher:</span> Tripartite-CN</h1>
+	<h1><span class="left-header" style="padding-left: 5.7em; background-color: #c0c0c0 ; color: #caf85e">Language:</span> English</h1> 
+	<h1><span class="left-header" style="padding-left: 4.6em; background-color: #e839d2; color: #caf85e">Metaphysics:</span> Christianity</h1>
+	<h1><span class="left-header" style="padding-left: 5.1em; background-color: #c0c0c0 ; color: #caf85e">Name Used:</span> Jesus</h1>
+	<h1><span class="left-header" style="background-color: #e839d2; color: #caf85e">Intended Measurement:</span> Time</h1>
+	<h1><span class="left-header" style="padding-left: 5.9em; background-color: #c0c0c0 ; color: #caf85e">Accuracy:</span> Silver</h1>
+	<h1><span class="left-header" style="padding-left: 4.1em; background-color: #e839d2; color: #caf85e">Bonus Round:</span> Unlocked</h2>
+    <img src="images/silver-medal.png">
+	<!-- Containers with their respective headers -->
+	<div id="future-score"><p><i>*NOTE: percent of accuracy is calculated by dividing the cipher's score by 49 (ie. "Perfect Win"). score is subject to change in the event of more discovery.</i></p></div>
+    <div class="container">
+        <h4 id="jesus">[NAME ONLY]</h4>
+        <div class="box-point"> 
+            <p>
+				Jesus = 136*<span style="padding-left: 24.9em">+1</span> 
+				<br>
+				Eighty-Thousand Five Hundred Thirty-Five** = 1336* 
+				<blockquote>
+					8:05:35** hands at 8/1/7 (see below) 
+					<br>
+					...
+					<br>
+					The Number of the Messiah = 817 (see below)
+				</blockquote>
+			</p>
+        </div>
+        <div class="box-point">
+			<p>
+				Jesus = 136*  
+				<br>
+				The Number Seventy-One Thousand Thirty** = 1336 
+				<blockquote>
+					7:10:30** hands at 7/2/6 (see below) 
+					<br>
+					...
+					<br>
+					What is the Number of God? = 726 (see below)
+			</p>
+		</div>
+        <div class="box-point">
+			<p>
+				Jesus = 136* 
+				<br>
+				The Number Eight Hundred Twenty-Seven** = 1360* 
+				<blockquote>
+					(827** = The Number of the Son of God)
+			</p>
+		</div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+    </div>
+
+    <div class="container">
+        <h4 id="messiah">"Messiah"</h4>
+        <div class="box-point"> 
+            <p>
+				Jesus = 136*<span style="padding-left: 25.1em">+1</span> 
+				<br>
+				Eighty-Thousand Five Hundred Thirty-Five** = 1336* 
+				<blockquote>
+					8:05:35** hands at 8/1/7 (see below) 
+					<br>
+					...
+					<br>
+					The Number of the Messiah = 817 (see below)
+				</blockquote>
+			</p>
+        </div> 
+        <div class="box-point">
+			<p> 
+				What are the Numbers of the Messiah? = 1032*
+				<blockquote>
+					1136** = The Number One Thousand Thirty-Two* 
+					<br>
+					136** = Jesus
+				</blockquote>
+			</p>
+		</div>
+        <div class="box-point">
+			<p>
+				These are Jesus' Numbers = 734*
+					<blockquote>
+						991 = Numbers Seven, Three, and Four* 
+						<br>
+						991 = What is the Number of the Messiah? 
+					</blockquote>
+			</p>
+		</div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+    </div>
+
+    <div class="container">
+        <h4 id="gods-son">"God's Son"</h4>
+        <div class="box-point"> 
+            <p>
+				The Number of the Son of God = 827*<span style="padding-left: 14.7em">+1</span>
+				<blockquote>
+					1360** = The Number Eight Hundred Twenty-Seven* 
+					<br>
+					136** = Jesus 
+				</blockquote>
+			</p>
+        </div> 
+        <div class="box-point">
+			<p> 
+				What is the Number of the Son of God? = 1001*
+				<blockquote> 
+					Number One Thousand One* = 825 
+					<br>
+					Seven Hundred Thirty-Two** = 825 
+					<br>
+					...
+					<br>
+					(732** = This is a Number of Jesus) 
+				</blockquote>
+			</p>
+		</div>
+        <div class="box-point">
+			<p> 
+				A Number of the Son of God = 727*
+				<blockquote>
+					1366** = The Number Seven Hundred Twenty-Seven* 
+					<br>
+					136** = Jesus 
+				</blockquote>
+			</p>
+		</div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+    </div>
+
+    <div class="container">
+        <h4 id="lord-god">"The Lord our God"</h4>
+        <div class="box-point"> 
+            <p>
+				The Number of the Lord our God = 883 (see below)<span style="padding-left: 9.6em">+1</span>
+				<blockquote>
+					8/8/3 hands at 8:40:15* 
+					<br>
+					... 
+					<br>
+					1306** = The Numbers Eight, Four, Zero, One, and Five*
+					<br>
+					136** = Jesus 
+				</blockquote>
+			</p>
+        </div> 
+        <div class="box-point">
+			<p> 
+				A Number of the Name of Jesus = 855 (see below)
+				<blockquote>
+					1/8.55 ≈ 0.1169* 
+					<br>
+					These are the Numbers of the Lord our God = 1169* 
+				</blockquote>
+			</p>
+		</div>
+        <div class="box-point">
+			<p> 
+				The Name of the Lord our God = 768 (see below) 
+				<blockquote>  
+					7/6/8 hands at 7:30:40* 
+					<br>
+					...
+					<br>
+					This is a Number of Jesus = 734*
+				</blockquote>
+			</p>
+		</div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+    </div>
+
+    <div class="container">
+        <h4 id="jesus-god">"Jesus = God"</h4>
+        <div class="box-point"> 
+            <p>
+				This is the Number of Jesus = 832*<span style="padding-left: 16em">+1</span>
+				<blockquote>
+					594 = Eight, Three, and Two* 
+					<br>
+					594 = What is God's Number? 
+				</blockquote>
+			</p>
+        </div> 
+        <div class="box-point">
+			<p> 
+				A Number of the Name of Jesus = 855* 
+				<blockquote>
+					God = 85*
+				</blockquote>
+			</p>
+		</div>
+        <div class="box-point">
+			<p> 
+				These are the Numbers of Jesus = 889*
+				<blockquote>
+					767 = Eight, Eight, and Nine* 
+					<br>
+					767 = What are the Numbers of God? 
+				</blockquote>
+			</p>
+		</div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+    </div>
+	
+	<div class="container">
+        <h4 id="the-name">"My Name/My Number/The Name: This Cipher's Character"</h4>
+        <div class="box-point"> 
+            <p>
+				Jesus = 136*<span style="padding-left: 24.9em">+1</span>
+				<blockquote>
+					978 = The Numbers One, Three, and Six*
+					<br>
+					978 = This is the Name of God Most High
+				</blockquote>
+			</p>
+        </div> 
+        <div class="box-point">
+			<p> 
+				Jesus = 136 (see below)
+				<blockquote>
+					1/3/6 hands at 1:15:30* 
+					<br>
+					...
+					<br>
+					749 = One, One, Five, Three, Zero*
+					<br>
+					749 = The Name of God Most High 
+				</blockquote>
+			</p>
+		</div>
+        <div class="box-point">
+			<p> 
+				Name of God = 333*
+				<blockquote>
+					1036** = Numbers Three, Three, and Three* 
+					<br>
+					136** = Jesus 
+					<br> 
+				</blockquote>
+			</p>
+		</div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+    </div> 
+	
+	<div class="container">
+        <h4 id="king-and-god">"King &amp; God"</h4>
+        <div class="box-point">
+			<p>
+				The Numbers of our King and God = 1036*<span style="padding-left: 12.6em">+1</span>
+				<blockquote>
+					Jesus = 136* 
+				</blockquote>
+			</p>
+		</div> 
+		<div class="box-point">
+		<p> 
+			The Number of our King and God = 1013*
+			<blockquote>
+				One, Zero, Three* = 451 
+				<br>
+				Four and Eight** = 451 
+				<br>
+				... 
+				<br>
+				(448** = Jesus' Number) 
+			</blockquote>
+		</p>
+		</div>
+        <div class="box-point">
+		<p> 
+			Our King and God = 546*
+			<blockquote>
+				1136** = The Number Five Hundred Forty-Six* 
+				<br>
+				136** = Jesus
+			</blockquote>
+		</p>
+		</div> 
+		<div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></div>
+		<div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+    </div>
+	
+	<div class="container">
+        <h4 class="header" id="bonus-box">[BONUS POINTS] <i>*optional</i></h4>
+		<div class="box-point">
+		<p> 
+			God's Number = 420 (see below)<span style="padding-left: 17em">+1</span> 
+			<blockquote>	
+				4:20 hands at 4/4* 
+				<br>
+				...
+				<br>
+				Number Forty-Four* = 635 
+				<br>
+				What are God's Numbers? = 635
+			</blockquote> 
+		</p>
+		</div>
+        <div class="box-point">
+		<p> 
+			What are God's Numbers? = 635 
+			<br>
+			Four Hundred Forty-Three* = 635 
+			<blockquote>
+				443* = God's Numbers 
+			</blockquote>			
+		</p>
+		</div> 
+		<div class="box-point">
+		<p> 
+			The Numbers of God = 575* 
+			<blockquote> 
+				Numbers Five and Seven* = 815 
+				<br>
+				The Number Eighty-Five** = 815 
+				<br>
+				...
+				<br>
+				(85** = God)
+			</blockquote>
+		</p>
+		</div> 
+		<div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></div>
+		<div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+        <div class="box-no-score"><p>N/A<span style="padding-left: 28em">(+0)</span></p></div>
+    </div>
+
+    <div id="total-box"> 
+        <h3><u>Grand Total</u>: <span>24</span></h3>
+    </div> 
+	<hr>
+	<hr>
+	
+	<div class="graph">
+    <div class="score-box basic-win">
+      <span class="score-name">Basic Win</span>
+      <span class="score-points">7-15 Points</span>
+    </div>
+    <div class="score-box bronze-win">
+      <span class="score-name">Bronze Win</span>
+      <span class="score-points">16-23 Points</span>
+    </div>
+    <div class="score-box silver-win">
+      <span class="score-name">Silver Win</span>
+      <span class="score-points">24-31 Points</span>
+	  <p id="check-mark">✓</p>
+    </div>
+    <div class="score-box gold-win">
+      <span class="score-name">Gold Win</span>
+      <span class="score-points">32-39 Points</span>
+    </div>
+    <div class="score-box platinum-win">
+      <span class="score-name">Platinum Win</span>
+      <span class="score-points">40-47 Points</span>
+    </div>
+    <div class="score-box near-perfect-win">
+      <span class="score-name">Near-Perfect Win</span>
+      <span class="score-points">48 Points</span>
+    </div>
+    <div class="score-box perfect-win" id="rainbow-border">
+      <span class="score-name">Perfect Win</span>
+      <span class="score-points">49+ Points</span>
+    </div>
+  </div> 
+  <hr>
+  <hr> 
+  <div id="rules-text">
+  <h2 style="text-align: center"><u>Rules</u></h2>
+	<p><i><b> 
+		Categories are comprised of the subject-at-hand. In the case of a cipher that lists "Christianity" as its metaphysics, the categories for Jesus might include "King and God" &amp; "Messiah".<br><br>
+		To make the fairest rules possible the most universal constant (from numbers 0 - 100) is 1 according to Benford's Law. From 0-100, the number 1 occurs more often as far as universal constants are concerned. Therefore I concluded that a contestant scoring at least 1 point in every category is most fair (hence the "Basic Win" award).<br><br> 
+		NOTE: brainstorming whether how many points must be scored in every category became more complex and unstable when requiring anything more than one point. For instance, a) an author of a cipher has had a great sense of accomplishment in scoring at least one point in every category (thereby making it accurate -at least technically); and, b) debating which number represents the source (ie. god) becomes merely a matter of personal opinion and belief. Thanks to Benford's Law the scoring not only settled every dispute but simplified the entire, scoring method. And this  scoring makes sense: a house is not 100% unless it has at least one piece of furniture, an appliance, a garage, electricity, etc. etc.<br><br>
+
+		A score can be counted by means of "word for word" or "measurement". For example, "God = 35" while "Thirty-Five = 355" &amp; "God = 35" while "3/5 hands equal 3:25" because "The Number of God = 325".<br><br>
+		Each Cipher must result in at least one point in every category to qualitfy. If a cipher scores more than 1 point in at least one category then all other categories must get at least 1 point for it to count. For example, if said cipher scores 6 points in Category#1 while scoring 1 point in all remaining categories -those extra 5 points in Category#1 do not count. Any extra points count as a bonus point of (+1) onto grand total.<br><br> 
+		If a contestant scores at least 1 point in every category -it counts as a "Basic Win" (with just an additional one bonus point).<br><br> 
+		BONUS POINTS: A bonus point is where a cipher gives a result that "answers back". For example, "Jesus = 87" while "Eighty-Seven = 208" where "The Number of Jesus = 208". This results in a bonus point worth (+1) onto grand total.<br><br> 
+		Bonus points may not exceed the number of points in every category. For example, if said cipher scores 3 points in every category, no more than 3 bonus points (+3) can be added to the grand total in the original scoring-round. If said cipher scores 5 points in one category and only 3 points in every other category, the max would still just be (+3) bonus points. Max bonus-points available are equal to the total number of categories (eg. 4 categories = 4 max bonus points in original scoring-round) -where each Bonus Round won will add +2 to contestant's grand total (must not exceed  the orginal win that is awarded; meaning, a contestant winning the "Gold Win" award can not win a "Platinum Win" by winning more bonus points).<br><br>
+		A contestant who scores, say, 32 points can attempt to achieve a "Gold Win" (High Tier/39 points) by entering as many bonus points as possible. A "Gold Win" is getting a max of 4 points in every category. In conclusion, that contestant will need to win 3 or 4 bonus rounds to achieve a high tier "Gold Win" where +2 points is added to that contestant's grand total for every 4 additional bonus points. Earning the first 4 points in the Bonus Category (of "Gold Win") will unlock the "Bonus Round" so that contestant may try to earn the high tier win that was awarded. <br><br>
+		The "Perfect Win" award is the only achievement that does not require any bonus points to unlock it.<br><br>
+	</i></b></p>
+  </div> 
+  <a href="../index.html">back to bar-graph</a>
+</body>
+</html>

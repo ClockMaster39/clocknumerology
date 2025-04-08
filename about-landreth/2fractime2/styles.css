@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #91e8ec;
+    font-size: 1.0em;
+  }
+  
+nav {
+    background-color: #eb2727;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+  }
+  
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+nav li {
+    display: inline-block;
+    margin-left: 140px; /* Add some spacing between menu items */
+  }
+  
+nav a {
+    color: whitesmoke;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    font-size: 18px;
+  }
+  
+nav a:hover {
+    background-color: #3a48f1;
+    border-radius: 20px;
+  }
+  
+  /* Rest of your CSS styles */
+  
+.main-container {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+.container {
+    flex: 1;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    border-width: 8px;
+  }
+  
+.container:last-child {
+    border-right: none;
+  }
+  
+.input-container {
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+    font-size: 1.2em;
+  }
+  
+.output-container,
+.r-container {
+    padding: 20px;
+    border-bottom: 5px solid #ccc;
+  }
+  
+button {
+    margin-top: 10px;
+  }
+  
+#output,
+#r1-output,
+#r2-output,
+#r3-output,
+#r4-output {
+    font-weight: bold;
+    font-size: 25px;
+    margin-top: 10px;
+  }
+  
+.r-container {
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  
+.scrollable {
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  
+img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+input[type="text"]
+  {
+    font-size: 18px;
+  }
+  
+
+.relative-footer {
+    position: absolute;
+    padding: 20px;
+    left: 25%;
+  }
+  
+#footer {
+    text-align: center;
+  }  
